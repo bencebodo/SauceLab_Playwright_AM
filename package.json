@@ -1,0 +1,23 @@
+{
+  "name": "saucedemo_playwright_am",
+  "version": "1.0.0",
+  "description": "Ez a projekt a [SauceDemo (Swag Labs)](https://www.saucedemo.com/) webalkalmazás automatizált End-to-End (E2E) tesztjeit tartalmazza. A keretrendszer **Playwright** és **TypeScript** alapokon nyugszik, és a jól karbantartható **Page Object Model (POM)** architektúrát használja.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bencebodo/SauceLab_Playwright_AM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/bencebodo/SauceLab_Playwright_AM/issues"
+  },
+  "homepage": "https://github.com/bencebodo/SauceLab_Playwright_AM#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.5.0"
+  }
+}
