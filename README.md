@@ -78,8 +78,8 @@ npx playwright show-report
 ### Tagek
 A riportban különböző tesztesetek tagekkel vannak ellátva:
 
-@SD_FLOW és @SD_CHECKOUT_VALIDATION - Teszt ID, filterezésével a különböző tesztesetek láthatóak minden letesztelt böngészőmotorral
-@PRODUCT - Vizsgált termék nevére szabott tag, kijelölésével a termékkel kapcsolatos teszteseteket szürhetjük
+- @SD_FLOW és @SD_CHECKOUT_VALIDATION - Teszt ID, filterezésével a különböző tesztesetek láthatóak minden letesztelt böngészőmotorral
+- @PRODUCT - Vizsgált termék nevére szabott tag, kijelölésével a termékkel kapcsolatos teszteseteket szürhetjük
 
 
 ### Projekt Struktúra (Architektúra)
