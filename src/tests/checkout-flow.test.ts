@@ -1,6 +1,7 @@
 import {test, expect} from './fixtures/fixtures';
 import { APP_CONFIG } from '../utils/constants';
 import { ProductDetails } from '../domain/models/product-details.model';
+import { UiProductsService } from '../services/products.service';
 
 let testIndex : number | null = 0;
 
@@ -28,7 +29,6 @@ for (const productName of productTestData) {
           description: await uiProductsService.getProductsDescriptionByName(productName)
         };
         
-      
         await expect(await uiProductsService.getCartCounter()).toBeHidden();
 
         return productDetails;
@@ -95,7 +95,7 @@ test.describe('Vásárlás teljes folyamata több termékre', () => {
       async ({ uiProductsService, uiCartService, uiCheckoutService }) => {
         let totalPrice = 0;
 
-        await test.step(`Két termék hozzáadása a kosárhoz: ${products.join(', ')} és kosár számláló ellenőrzése`, async () => {
+        await test.step(`Több termék hozzáadása a kosárhoz: ${products.join(', ')} és kosár számláló ellenőrzése`, async () => {
           for (const productName of products) {
             await uiProductsService.addProductToCart(productName);
             const productPrice = await uiProductsService.getProductsPriceByName(productName);
@@ -156,7 +156,36 @@ test.describe('Vásárlás teljes folyamata egy termékre, majd visszatérés a 
         await uiProductsService.addProductToCart(product);
 
         expect(await uiProductsService.isProductAddedToCart(product)).toBeTruthy();
-        await expect(await uiProductsService.getCartCounter()).toHaveText('1');
+        expect(await uiProductsService.getCartCounter()).toHaveText('1');
       });
     })
 });
+
+test.describe('Vásárlás félbehagyása egy termékre, egy második termék kiválasztása és visszatérés a vásárláshoz', async () => {
+  const firstProduct = productTestData[0];
+  const secondProduct = productTestData[1];
+  test('Egy termék hozzáadása a kosárhoz, visszatérés a Főoldalra egy másik termék kiválasztása és a vássárlás véglegesítése', {tag: [`@SD-FLOW-${testIndex!++}`, `@PRODUCT-${firstProduct}`, `@PRODUCT-${secondProduct}`]},
+    async ({ uiProductsService, uiCartService, uiCheckoutService }) => {
+    await test.step(`Első termék hozzáadása a kosárhoz: ${firstProduct} és kosár megnyitása`, async () => {
+      await uiProductsService.addProductToCart(firstProduct);
+      await uiProductsService.goToCart();
+    })
+    await test.step(`Visszatérés vásárláshoz, első termék ellenőrzése`, async () => {
+      await uiCartService.returnToShopping();
+      expect(await uiProductsService.isProductAddedToCart(firstProduct)).toBeTruthy();
+    })
+    await test.step(`Második termék hozzáadása a kosárhoz: ${secondProduct}`, async () => {
+      await uiProductsService.addProductToCart(secondProduct);
+      await uiProductsService.goToCart();
+    })
+    await test.step(`Kosárban lévő termékek ellenőrzése, majd vásárlás véglegesítése`, async () => {
+      expect(await uiCartService.getAllProductsInCart()).toHaveLength(2);
+      await uiCartService.goToCheckout();
+
+      await uiCheckoutService.fillInCheckoutInformation('John', 'Doe', '12345');
+      await uiCheckoutService.continueToOverview();
+      await uiCheckoutService.finishOrder();
+      await expect(await uiCheckoutService.succesfulOrderImg()).toBeVisible();
+    })
+  })
+})
