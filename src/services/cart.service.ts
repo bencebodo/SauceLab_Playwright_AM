@@ -1,5 +1,5 @@
 import { ProductComponent } from '../components/product.component';
-import {CartPage} from '../pages/cart.page';
+import { CartPage } from '../pages/cart.page';
 import { ProductDetails } from '../domain/models/product-details.model';
 import { Locator } from 'playwright-core';
 
@@ -41,10 +41,10 @@ export class UiCartService {
     async returnToShopping(): Promise<void> {
         await this.cartPage.clickContinueShoppingButton();
     }
-    
+
     async getCartCounter(): Promise<Locator> {
-            return await this.cartPage.cartCounter;
-        }
+        return await this.cartPage.cartCounter;
+    }
 
     async getProductDetailsByName(productName: string): Promise<ProductDetails> {
         const product = await this.cartPage.getProductByName(productName);

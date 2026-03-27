@@ -19,7 +19,7 @@ export class OverviewPage {
 
     async getSubtotal(): Promise<string | null> {
         return await this.subtotalLabel.textContent();
-    
+
     }
 
     async clickOnBackHomeButton(): Promise<void> {

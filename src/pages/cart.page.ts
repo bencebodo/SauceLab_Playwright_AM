@@ -1,5 +1,5 @@
-import {type Page, type Locator} from '@playwright/test';
-import {ProductComponent} from '../components/product.component';
+import { type Page, type Locator } from '@playwright/test';
+import { ProductComponent } from '../components/product.component';
 
 export class CartPage {
     readonly page: Page;
@@ -18,7 +18,7 @@ export class CartPage {
         this.resetAppStateButton = page.locator('#reset_sidebar_link');
         this.burgerMenuButton = page.locator('#react-burger-menu-btn');
         this.cartCounter = page.locator('.shopping_cart_badge');
-}   
+    }
 
     async getProductByName(productName: string): Promise<ProductComponent> {
         const productElement = this.cartItems.filter({ hasText: productName }).first();

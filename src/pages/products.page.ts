@@ -1,4 +1,4 @@
-import {type Page, type Locator} from '@playwright/test';
+import { type Page, type Locator } from '@playwright/test';
 import { ProductComponent } from '../components/product.component';
 
 export class ProductsPage {
@@ -25,7 +25,7 @@ export class ProductsPage {
 
     async getallProducts(): Promise<ProductComponent[]> {
         const productElements = await this.invenoryItems.all();
-                return productElements.map(item => new ProductComponent(item));
+        return productElements.map(item => new ProductComponent(item));
     }
 
     async sortByPrice(): Promise<void> {

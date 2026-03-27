@@ -23,7 +23,7 @@ export class UiCheckoutService {
         await this.checkoutPage.enterLastName(lastName);
         await this.checkoutPage.enterPostalCode(postalCode);
     }
-    
+
     async isOverviewPageDisplayed(): Promise<boolean> {
         return await this.overviewPage.finishButton.isVisible();
     }

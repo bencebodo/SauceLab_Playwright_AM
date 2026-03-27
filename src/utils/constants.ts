@@ -1,5 +1,3 @@
-import { error } from "node:console";
-
 export const APP_CONFIG = {
     baseurl: "https://www.saucedemo.com/",
     timeout: {

@@ -22,7 +22,7 @@ const checkoutTestData: CheckoutDetails[] = [
 test.describe('Termék hozzáadása a kosárhoz, különböző vásárlói adatok kitöltése', () => {
     for (const checkoutData of checkoutTestData) {
         test(`Egy termék hozzáadása a kosárhoz, vásárló adatok kitöltése: ${checkoutData.firstName} ${checkoutData.lastName} ${checkoutData.postalCode}`, { tag: `@SD-CHECKOUT-VALIDATION-${testIndex!++}` },
-            async ({page, uiProductsService, uiCartService, uiCheckoutService }) => {
+            async ({ page, uiProductsService, uiCartService, uiCheckoutService }) => {
                 const productName = "Test.allTheThings() T-Shirt (Red)";
                 let alertTriggered = false;
 

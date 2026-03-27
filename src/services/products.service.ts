@@ -52,8 +52,8 @@ export class UiProductsService {
     }
 
     async getProductDetailsByName(productName: string): Promise<ProductDetails> {
-            const product = await this.productsPage.getProductByName(productName);
-    
-            return await product.getProductDetails();
-        }
+        const product = await this.productsPage.getProductByName(productName);
+
+        return await product.getProductDetails();
+    }
 }
