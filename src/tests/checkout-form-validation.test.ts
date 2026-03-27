@@ -22,8 +22,14 @@ const checkoutTestData: CheckoutDetails[] = [
 test.describe('Termék hozzáadása a kosárhoz, különböző vásárlói adatok kitöltése', () => {
     for (const checkoutData of checkoutTestData) {
         test(`Egy termék hozzáadása a kosárhoz, vásárló adatok kitöltése: ${checkoutData.firstName} ${checkoutData.lastName} ${checkoutData.postalCode}`, { tag: `@SD-CHECKOUT-VALIDATION-${testIndex!++}` },
-            async ({ uiProductsService, uiCartService, uiCheckoutService }) => {
+            async ({page, uiProductsService, uiCartService, uiCheckoutService }) => {
                 const productName = "Test.allTheThings() T-Shirt (Red)";
+                let alertTriggered = false;
+
+                page.on('dialog', async dialog => {
+                    alertTriggered = true;
+                    await dialog.dismiss();
+                });
 
                 await test.step(`Termék hozzáadása a kosárhoz: ${productName}`, async () => {
                     await uiProductsService.addProductToCart(productName);
@@ -39,6 +45,7 @@ test.describe('Termék hozzáadása a kosárhoz, különböző vásárlói adato
                     await uiCheckoutService.continueToOverview();
 
                     if (checkoutData.shouldPass) {
+                        expect(alertTriggered).toBeFalsy();
                         expect(await uiCheckoutService.isOverviewPageDisplayed()).toBeTruthy();
 
                         await uiCheckoutService.finishOrder();
