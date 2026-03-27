@@ -152,7 +152,7 @@ test.describe('Vásárlás teljes folyamata több termékre', () => {
         });
       });
   };
-  test('Egy termék hozzáadása a kosárhoz, visszatérés a Főoldalra egy másik termék kiválasztása és a vássárlás véglegesítése', { tag: [`@SD-FLOW-${testIndex!++}`, `@PRODUCT-${twoProducts[0]}`, `@PRODUCT-${twoProducts[1]}`] },
+  test('Egy termék hozzáadása a kosárhoz, visszatérés a Főoldalra egy másik termék kiválasztása és a vásárlás véglegesítése', { tag: [`@SD-FLOW-${testIndex!++}`, `@PRODUCT-${twoProducts[0]}`, `@PRODUCT-${twoProducts[1]}`] },
     async ({ uiProductsService, uiCartService, uiCheckoutService }) => {
       await test.step(`Első termék hozzáadása a kosárhoz: ${twoProducts[0]} és kosár megnyitása`, async () => {
         await uiProductsService.addProductToCart(twoProducts[0]);
